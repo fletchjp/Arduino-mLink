@@ -12,6 +12,8 @@ The mLink library has a lot of useful examples. One of them is the [mLink I2C sc
 
 Many of these examples make use of the [TaskManagerIO library](https://tcmenu.github.io/documentation/arduino-libraries//taskmanager-io/) to control the mLink device. This avoids the need to use delay() in the code. Examples using this library will have Task in the filename.
 
+John Fletcher (john@bunbury28.plus.com}
+
 ## mLink_Button_Pad_Read_Task
 
 Demonstration of the mLink 6 Button component.
