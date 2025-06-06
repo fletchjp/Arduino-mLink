@@ -15,3 +15,9 @@ Many of these examples make use of the [TaskManagerIO library](https://tcmenu.gi
 ## mLink_Button_Pad_Read_Task
 
 Demonstration of the mLink 6 Button component.
+
+## mLink_Char_LCD_Hello_World_Task
+
+Demonstration of the mLink character LCD display. It also shows the way to use TaskManagerIO to run a task once only.
+
+Notice that when using the mLink display there is no need to specify anything except the I2C address to get it running.
