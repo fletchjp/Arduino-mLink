@@ -23,3 +23,7 @@ Demonstration of the mLink 6 Button component.
 Demonstration of the mLink character LCD display. It also shows the way to use TaskManagerIO to run a task once only.
 
 Notice that when using the mLink display there is no need to specify anything except the I2C address to get it running.
+
+## Other Arduino codes
+
+Here is a link to [MERG-Arduino-Software](https://github.com/fletchjp/MERG-Arduino-Software) which has other Arduino codes.
