@@ -10,11 +10,11 @@ These codes all need the [mLink Arduino library](https://github.com/HobbyCompone
 
 The mLink library has a lot of useful examples. One of them is the [mLink I2C scanner](https://github.com/HobbyComponents/mLink/tree/main/examples/mLink_I2C_Scanner) which can be used to check the I2C addresses of the mLink components connected to an Arduino.
 
-Many of these examples make use of the [TaskManagerIO library](https://tcmenu.github.io/documentation/arduino-libraries//taskmanager-io/) to control the mLink device. This avoids the need to use delay() in the code. Examples using this library will have Task in the filename.
+For each of the mLink devices there are pages on the [Hobby Components](https://hobbycomponents.com/) web site which explain how to connect up the I2C wiring.
+
+Many of my examples extend the mLink library examples and make use of the [TaskManagerIO library](https://tcmenu.github.io/documentation/arduino-libraries//taskmanager-io/) to control the mLink device. This avoids the need to use delay() in the code. Examples using this library will have Task in the filename.
 
 I am going to take this a step at a time so that it is easy for those not familiar to get the idea.
-
-For each of the mLink devices there are pages on the [Hobby Components](https://hobbycomponents.com/) web site which explain how to connect up the I2C wiring.
 
 Please contact me in the case of difficulty.
 
