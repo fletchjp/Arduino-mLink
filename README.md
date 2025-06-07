@@ -30,6 +30,12 @@ Demonstration of the mLink character LCD display. It also shows the way to use T
 
 Notice that when using the mLink display there is no need to specify anything except the I2C address to get it running.
 
+## mLink_Button_Pad_Read_LCD_Task
+
+This example combines the two previous examples to show how the button press can be displayed on the LCD.
+
+Notice that each mLink device has to be given its I2C number as a parameter.
+
 ## Other Arduino codes
 
 Here is a link to [MERG-Arduino-Software](https://github.com/fletchjp/MERG-Arduino-Software) which has other Arduino codes.
