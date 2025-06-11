@@ -36,6 +36,12 @@ This example combines the two previous examples to show how the button press can
 
 Notice that each mLink device has to be given its I2C number as a parameter.
 
+## mLink_Button_Pad_Read_LCD_Task
+
+This example adds a 4x4 Keypad module to the previous example to show how the button press and key press can be displayed on the LCD.
+
+Notice that each mLink device has to be given its I2C number as a parameter.
+
 ## Other Arduino codes
 
 Here is a link to [MERG-Arduino-Software](https://github.com/fletchjp/MERG-Arduino-Software) which has other Arduino codes.
