@@ -42,6 +42,18 @@ This example adds a 4x4 Keypad module to the previous example to show how the bu
 
 Notice that each mLink device has to be given its I2C number as a parameter.
 
+## mLink_12CH_Servo_Step Examples
+
+This example has code for the 12 channel servo module
+
+## mLink_Relay_Blink
+
+This example detects the number of relays available on the module.
+
+## PJON_examples
+
+These examples have PJON BitBang code to communicate between Arduinos.
+
 ## Other Arduino codes
 
 Here is a link to [MERG-Arduino-Software](https://github.com/fletchjp/MERG-Arduino-Software) which has other Arduino codes.
