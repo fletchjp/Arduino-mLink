@@ -1,0 +1,143 @@
+// mLink_Button_Pad_Read_LCD_Task_PJON.ino 
+// Combine Button Pad and LCD and add Task handling.
+// Add Keypad as well. Now both devices write to the display.
+// mLink devices must be addressed with the correct I2C address.
+// Add sending using PJON Software Bit Bang Blink with Response examples.
+
+/* FILE:    mLink_Button_Pad_Read.ino
+   DATE:    20/04/22
+   VERSION: 1.0
+   AUTHOR:  Andrew Davies
+   
+
+This sketch demonstrates how to check the button pads
+to see if a putton has been pressed and if so read it from
+its buffer.
+
+Supported mLink products:
+
+mLink 6 Button Pad (SKU: HCMODU0193)
+mLink 2004 Character LCD Blue (SKU: HCMODU0190B)
+
+Please see Licence.txt in the library folder for terms of use.
+*/
+
+#include <PJONSoftwareBitBang.h>
+#include <TaskManagerIO.h>
+#include "mLink.h"                                    // Include the library
+
+mLink mLink;                                          // Create an instance of the library
+
+PJONSoftwareBitBang bus(45);
+
+/// error_handler  
+void error_handler(uint8_t code, uint16_t data, void *custom_pointer) {
+  if(code == PJON_CONNECTION_LOST) {
+    Serial.print("Connection lost with device id ");
+    Serial.println(bus.packets[data].content[0], DEC);
+    // Avoid Serial interference during test flushing
+    Serial.flush();
+  }
+};
+
+void receiver_function(uint8_t *payload, uint16_t length, const PJON_Packet_Info &packet_info) {
+  /* Make use of the payload before sending something, the buffer where payload points to is
+     overwritten when a new message is dispatched */
+  if(payload[0] == 'B') {
+    Serial.println("BLINK");
+    // Avoid Serial interference during test flushing
+    Serial.flush();
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(30);
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+};
+
+// Note local duplication of the default values from the mlink library
+#define I2C_ADD_BPAD BPAD_I2C_ADD            // 0x59 Default I2C address for Button PAD
+#define I2C_ADD_LCD  CLCD_I2C_ADD            // 0x56 Default I2C address for LCD
+#define I2C_ADD_KPAD 0x55                    // Default I2C address for KeyPad
+
+// Function declarations.
+// These are not needed in Arduino code.
+// It is good practice to include them to document what functions are defined later.
+void hello_world();
+void button_and_display();
+
+
+void setup() 
+{
+  Serial.begin(115200);
+  Serial.println("Button Pad reading with display to LCD with KeyPad using a Task and PJON transmitter");
+  #if defined(ARDUINO_AVR_NANO_EVERY)
+    Serial.println("ARDUINO_AVR_NANO_EVERY");
+    Serial.println("Serial1 is available");
+    #if defined(AVR_NANO_4809_328MODE)
+      Serial.println("Simulation of 328 mode is available"); 
+    #endif
+  #else
+     Serial.println("Not an ARDUINO_AVR_NANO_EVERY");
+  #endif
+  mLink.init();                             // Initialise the library
+  mLink.cLCD_clear(I2C_ADD_LCD);
+
+  taskManager.schedule(onceSeconds(5),hello_world);
+  taskManager.schedule(repeatSeconds(1),button_and_display);
+  taskManager.schedule(repeatSeconds(4),keypad);
+
+  bus.strategy.set_pin(12);
+  bus.set_error(error_handler);
+  bus.set_receiver(receiver_function);
+  bus.begin();
+  bus.send_repeatedly(44, "B", 1, 1000000); // Send B to device 44 every second
+
+}
+
+void hello_world() 
+{
+  mLink.cLCD_backlight(I2C_ADD_LCD,10);
+  mLink.cLCD_cursor(I2C_ADD_LCD, 5, 0);     // Set the cursor to col 5 row 0
+  mLink.cLCD_print(I2C_ADD_LCD, "Hello");   // Print something
+  
+  mLink.cLCD_cursor(I2C_ADD_LCD, 5, 1);     // Set the cursor to col 5 row 1
+  mLink.cLCD_print(I2C_ADD_LCD, "PJON World");   // Print something
+}
+
+
+void button_and_display() 
+{  
+  byte empty = mLink.bPad_Empty(I2C_ADD_BPAD);			  // Check to see if there is anything in the keypad buffer
+
+  if(!empty)                                          
+  { 
+    byte key = mLink.read(I2C_ADD_BPAD, BPAD_BUFFER);      // If so then read a key from the buffer and print it
+
+    Serial.print("Button: ");                        
+    Serial.println(key);
+    Serial.flush();
+    mLink.cLCD_cursor(I2C_ADD_LCD, 0, 2);     // Set the cursor to col 0 row 2
+    mLink.cLCD_print(I2C_ADD_LCD, "Button: ");   // Print label
+    mLink.cLCD_print(I2C_ADD_LCD, key);       // Print key value
+  }
+
+}
+
+void keypad() 
+{  
+  char key = mLink.read(I2C_ADD_KPAD, KEYPAD_4X4_KEY);     // Read the key status
+
+  if(key)                                             // Has a key been pressed ?
+  { 
+    Serial.print("Key: ");                            // If so then output the key to the serial monitor
+    Serial.println(key);
+    mLink.cLCD_cursor(I2C_ADD_LCD, 0, 3);     // Set the cursor to col 0 row 2
+    mLink.cLCD_print(I2C_ADD_LCD, "Key: ");   // Print label
+    mLink.cLCD_print(I2C_ADD_LCD, key);       // Print key value
+  };
+}
+
+void loop() {
+   taskManager.runLoop();
+   bus.update();
+   bus.receive(1000);
+}
