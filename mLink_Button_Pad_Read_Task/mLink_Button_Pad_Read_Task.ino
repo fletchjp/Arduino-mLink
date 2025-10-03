@@ -22,7 +22,7 @@ Please see Licence.txt in the library folder for terms of use.
 // Modified by JPF to change Serial speed and delay time. Added a first print.
 
 
-//#include <TaskManagerIO.h>
+#include <TaskManagerIO.h>
 #include "mLink.h"                                    // Include the library
 
 mLink mLink;                                          // Create an instance of the library
@@ -74,5 +74,5 @@ void read_bpad()
 }
 
 void loop() {
-   //taskManager.runLoop();
+   taskManager.runLoop();
 }
