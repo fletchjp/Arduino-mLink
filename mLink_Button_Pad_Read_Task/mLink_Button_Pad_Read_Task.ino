@@ -22,7 +22,7 @@ Please see Licence.txt in the library folder for terms of use.
 // Modified by JPF to change Serial speed and delay time. Added a first print.
 
 
-#include <TaskManagerIO.h>
+//#include <TaskManagerIO.h>
 #include "mLink.h"                                    // Include the library
 
 mLink mLink;                                          // Create an instance of the library
@@ -36,7 +36,13 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println("Button Pad reading with Task");
-  #if defined(ARDUINO_AVR_NANO_EVERY)
+#ifdef ARDUINO_MINIMA
+    Serial.println("\nArduino R4 Minima");
+#endif
+#ifdef ARDUINO_UNOR4_WIFI
+    Serial.println("\nArduino R4 Wifi");
+#endif
+#if defined(ARDUINO_AVR_NANO_EVERY)
     Serial.println("ARDUINO_AVR_NANO_EVERY");
     Serial.println("Serial1 is available");
     #if defined(AVR_NANO_4809_328MODE)
@@ -45,9 +51,9 @@ void setup()
   #else
      Serial.println("Not an ARDUINO_AVR_NANO_EVERY");
   #endif
-  mLink.init();                                       // Initialise the library
+  ---mLink.init();                                       // Initialise the library
 
-  taskManager.scheduleFixedRate(interval,read_bpad);
+  //taskManager.scheduleFixedRate(interval,read_bpad);
 
 }
 
@@ -67,5 +73,5 @@ void read_bpad()
 }
 
 void loop() {
-   taskManager.runLoop();
+   //taskManager.runLoop();
 }
