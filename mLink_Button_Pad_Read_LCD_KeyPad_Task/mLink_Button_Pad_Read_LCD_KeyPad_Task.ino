@@ -10,7 +10,7 @@
    
 
 This sketch demonstrates how to check the button pads
-to see if a putton has been pressed and if so read it from
+to see if a button has been pressed and if so read it from
 its buffer.
 
 Supported mLink products:
