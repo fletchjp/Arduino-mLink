@@ -1,4 +1,4 @@
-// mLink_LongReach_Receive_Example Task.ino
+// mLink_Button_Pad_Read Task.ino
 // Adapted by John Fletcher (john@bunbury28.plus.com)
 // This now uses TaskManagerIO.
 // It also checks for an Arduino NANO Every. 
@@ -9,7 +9,7 @@
    AUTHOR:  Andrew Davies
    
 This sketch demonstrates how to check the button pads
-to see if a putton has been pressed and if so read it from
+to see if a button has been pressed and if so read it from
 its buffer.
 
 Supported mLink products:
