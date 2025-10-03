@@ -35,6 +35,7 @@ void read_bpad();
 void setup() 
 {
   Serial.begin(115200);
+  delay(5000);  // This is needed to get the output.-
   Serial.println("Button Pad reading with Task");
 #ifdef ARDUINO_MINIMA
     Serial.println("\nArduino R4 Minima");
