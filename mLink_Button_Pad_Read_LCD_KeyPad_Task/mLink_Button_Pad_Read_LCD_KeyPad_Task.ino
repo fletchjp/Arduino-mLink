@@ -50,6 +50,15 @@ void setup()
       Serial.println("Simulation of 328 mode is available"); 
     #endif
   #else
+  #ifdef ARDUINO_ARCH_RP2040
+    Serial.println("Running tests on a Pico");
+#endif
+#ifdef ARDUINO_MINIMA
+    Serial.println("\nArduino R4 Minima");
+#endif
+#ifdef ARDUINO_UNOR4_WIFI
+    Serial.println("\nArduino R4 Wifi");
+#endif
      Serial.println("Not an ARDUINO_AVR_NANO_EVERY");
   #endif
   mLink.init();                             // Initialise the library
