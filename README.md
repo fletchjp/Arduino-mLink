@@ -20,6 +20,10 @@ Please contact me in the case of difficulty.
 
 John Fletcher (john@bunbury28.plus.com}
 
+## Arduino Uno R4 Minima
+
+I am starting to test these codes with Arduino R4s.
+
 ## mLink_Button_Pad_Read_Task
 
 Demonstration of the mLink 6 Button component.
