@@ -51,7 +51,7 @@ void setup()
   #else
      Serial.println("Not an ARDUINO_AVR_NANO_EVERY");
   #endif
-  ---mLink.init();                                       // Initialise the library
+  mLink.init();                                       // Initialise the library
 
   //taskManager.scheduleFixedRate(interval,read_bpad);
 
