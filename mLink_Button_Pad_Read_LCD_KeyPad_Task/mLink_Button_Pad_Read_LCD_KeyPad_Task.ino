@@ -42,6 +42,7 @@ void button_and_display();
 void setup() 
 {
   Serial.begin(115200);
+  delay(5000);
   Serial.println("Button Pad reading with display to LCD with KeyPad using a Task");
   #if defined(ARDUINO_AVR_NANO_EVERY)
     Serial.println("ARDUINO_AVR_NANO_EVERY");
@@ -74,10 +75,13 @@ void hello_world()
 {
   mLink.cLCD_backlight(I2C_ADD_LCD,10);
   mLink.cLCD_cursor(I2C_ADD_LCD, 5, 0);     // Set the cursor to col 5 row 0
-  mLink.cLCD_print(I2C_ADD_LCD, "Hello");   // Print something
-  
+  char hello[] = "Hello";
+  char *phello = hello;
+  mLink.cLCD_print(I2C_ADD_LCD, phello);   // Print something
+  char world[] = "World";
+  char *pworld = world;
   mLink.cLCD_cursor(I2C_ADD_LCD, 5, 1);     // Set the cursor to col 5 row 1
-  mLink.cLCD_print(I2C_ADD_LCD, "World");   // Print something
+  mLink.cLCD_print(I2C_ADD_LCD, pworld);   // Print something
 }
 
 
@@ -88,12 +92,14 @@ void button_and_display()
   if(!empty)                                          
   { 
     byte key = mLink.read(I2C_ADD_BPAD, BPAD_BUFFER);      // If so then read a key from the buffer and print it
-
+    char button[] = "Button: ";
+    char* pbutton = button; 
+ 
     Serial.print("Button: ");                        
     Serial.println(key);
     Serial.flush();
     mLink.cLCD_cursor(I2C_ADD_LCD, 0, 2);     // Set the cursor to col 0 row 2
-    mLink.cLCD_print(I2C_ADD_LCD, "Button: ");   // Print label
+    mLink.cLCD_print(I2C_ADD_LCD, pbutton);   // Print label
     mLink.cLCD_print(I2C_ADD_LCD, key);       // Print key value
   }
 
@@ -105,10 +111,12 @@ void keypad()
 
   if(key)                                             // Has a key been pressed ?
   { 
+    char keys[] = "Key: ";
+    char* pkeys = keys; 
     Serial.print("Key: ");                            // If so then output the key to the serial monitor
     Serial.println(key);
     mLink.cLCD_cursor(I2C_ADD_LCD, 0, 3);     // Set the cursor to col 0 row 2
-    mLink.cLCD_print(I2C_ADD_LCD, "Key: ");   // Print label
+    mLink.cLCD_print(I2C_ADD_LCD, keys);   // Print label
     mLink.cLCD_print(I2C_ADD_LCD, key);       // Print key value
   };
 }
