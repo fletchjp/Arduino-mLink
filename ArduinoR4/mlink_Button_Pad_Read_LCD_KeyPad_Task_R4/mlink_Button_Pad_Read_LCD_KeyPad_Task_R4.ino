@@ -74,6 +74,7 @@ void setup()
 
 void hello_world() 
 {
+  // Getting rid of compiler warnings about char strings.
   mLink.cLCD_backlight(I2C_ADD_LCD,10);
   mLink.cLCD_cursor(I2C_ADD_LCD, 5, 0);     // Set the cursor to col 5 row 0
   char hello[] = "Hello";
