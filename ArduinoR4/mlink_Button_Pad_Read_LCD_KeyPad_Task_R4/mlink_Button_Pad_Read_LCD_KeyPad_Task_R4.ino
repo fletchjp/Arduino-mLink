@@ -43,8 +43,9 @@ void button_and_display();
 void setup() 
 {
   Serial.begin(115200);
+  delay(5000);
   Serial.println("Button Pad reading with display to LCD with KeyPad using a Task");
-  #if defined(ARDUINO_AVR_NANO_EVERY)
+ #if defined(ARDUINO_AVR_NANO_EVERY)
     Serial.println("ARDUINO_AVR_NANO_EVERY");
     Serial.println("Serial1 is available");
     #if defined(AVR_NANO_4809_328MODE)
@@ -78,7 +79,7 @@ void hello_world()
   mLink.cLCD_print(I2C_ADD_LCD, "Hello");   // Print something
   
   mLink.cLCD_cursor(I2C_ADD_LCD, 5, 1);     // Set the cursor to col 5 row 1
-  mLink.cLCD_print(I2C_ADD_LCD, "World");   // Print something
+  mLink.cLCD_print(I2C_ADD_LCD, "R4 World");   // Print something
 }
 
 
